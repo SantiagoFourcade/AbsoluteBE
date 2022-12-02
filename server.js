@@ -1,11 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-let Admin = false
+const productsMock = require("./mock/products.json")
+const crypto = require(`crypto`)
+const {randomUUID} = require(`crypto`)
+//const admRouter = require("./Routes/adm")
+//let Admin = false
 const port = 3000;
+
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json({}));
+
+//Products
 
 const products = [
     {
@@ -80,15 +88,19 @@ const products = [
     },
 ];
 
-//Routes
+//Routes Products
 
 app.get("/api/products", (req, res) => {
   res.send(products);
 });
 
+//Route Carrito
+
 app.get("api/shoppingcart", (req, res) => {
     res.send(products);
 })
+
+//Route Pay
 
 app.post("/api/pay", (req, res) => {
     const ids = req.body;
@@ -106,37 +118,6 @@ app.post("/api/pay", (req, res) => {
   });
 
 app.use("/", express.static("views"));
-
-//Solo Admin
-function soloParaAdmin(req, res, next) {
-    if(Admin) {
-        next()
-    } else {
-        res.sendStatus(403)
-    }
-}
-
-app.post(`/login`, (req, res) => {
-    Admin = true
-    res.sendStatus(200)
-})
-
-app.post(`/logout`, (req, res) => {
-    Admin = false
-    res.sendStatus(200)
-})
-
-app.get(`/publico`, (req, res) => {
-    res.send(`Esto es un endpoint publico`)
-})
-
-app.post(`/privado`, soloParaAdmin, (req, res) => {
-    res.send(`Esto es un endpoint privado`)
-})
-
-app.all(`*`, (req, res) => {
-    res.status(404).json(/*no implementada!*/)
-})
 
 
 //Localhost
