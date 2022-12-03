@@ -4,10 +4,10 @@ const {admDeleteProdById, admGetProd, admGetProdById, admPatchProdById, admPostP
 
 const routerAdm = express.Router()
 
-routerAdm.get(`/login/`, admGetProd)
-routerAdm.get(`/login/:id`, admGetProdById)
-routerAdm.post(`/login/`, admPostProd)
-routerAdm.delete(`/login/:id`, admDeleteProdById)
-routerAdm.put(`/login/:id`, admPutProdById)
-routerAdm.patch(`/login/:id`, admPatchProdById)
+routerAdm.get(`/login/buscar/`, admGetProd)
+routerAdm.get(`/login/buscar/:id`, admGetProdById)
+routerAdm.post(`/login/buscar/`, admPostProd)
+routerAdm.delete(`/login/buscar/:id`, admDeleteProdById)
+routerAdm.put(`/login/buscar/:id`, admPutProdById)
+routerAdm.patch(`/login/buscar/:id`, admPatchProdById)
 

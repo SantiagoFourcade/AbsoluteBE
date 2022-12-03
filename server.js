@@ -12,6 +12,8 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json({}));
+app.use(express.urlencoded({extended:true}));
+app.set(`view engine`, `ejs`);
 
 //Products
 
